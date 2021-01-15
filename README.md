@@ -20,11 +20,17 @@ LTE application which exposes a REST endpoint and returns a JSON payload.
 
 ## Setup
 - Clone repository
-  `git clone https://github.com/ethanejones/LTEApplication.git`
+  ```sh
+  git clone https://github.com/ethanejones/LTEApplication.git
+  ```
 - Change directory to `LTEApplication`
-  `cd LTEApplication`
+  ```sh
+  cd LTEApplication
+  ```
 - Build project
-  `mvnw clean package`
+  ```sh
+  mvnw clean package
+  ```
 
 ## Run the Application
 `java -jar target\LTEApplication-<VERSION>-SNAPSHOT.jar`
