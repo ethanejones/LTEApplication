@@ -20,7 +20,12 @@ set -x
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
 
-echo "Would build the following: ${NAME}-${VERSION}"
+set -x
+DOCKER_IMAGE_NAME=${NAME,,}
+DOCKER_IMAGE_TAG=${VERSION,,}
+set +x
+
+echo "Would build the following: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
 
 #echo 'The following command runs and outputs the execution of your Java'
 #echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
