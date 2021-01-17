@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Maven Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
@@ -19,6 +19,11 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh './jenkins/scripts/build-and-deploy-image.sh'
             }
         }
     }
