@@ -4,6 +4,8 @@ public class Message {
 
     private final String message;
 	private final long timestamp;
+	private final String app;
+	private final String version;
 
 	public Message(String message, long timestamp, String app, String version) {
 		this.message = message;
