@@ -13,4 +13,5 @@ cmd /c docker build -t ethanejones/%DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG% .
 cmd /c docker build -t ethanejones/%DOCKER_IMAGE_NAME%:latest .
 
 REM Push tagged images to DockerHub
-cmd /c docker image push --all-tags ethanejones/%DOCKER_IMAGE_NAME%
+cmd /c docker image push ethanejones/%DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG%
+cmd /c docker image push ethanejones/%DOCKER_IMAGE_NAME%:latest
