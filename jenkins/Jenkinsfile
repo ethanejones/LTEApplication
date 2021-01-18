@@ -49,7 +49,7 @@ pipeline {
                 label 'windows'
             }
             steps {
-                bat 'jenkins/scripts/build-and-deploy-image.cmd'
+                bat 'jenkins/scripts/build-tag-push-image.cmd'
             }
         }
     }
