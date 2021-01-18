@@ -13,3 +13,4 @@ FOR /F %%i IN ('powershell -command "(get-item env:'VERSION').Value.ToLower()"')
 
 REM Build tagged Docker image
 cmd /c docker build -t ethanejones/%DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG% .
+cmd /c docker build -t ethanejones/%DOCKER_IMAGE_NAME%:latest
