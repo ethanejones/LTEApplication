@@ -1,0 +1,56 @@
+pipeline {
+    agent none
+    stages {
+        stage('Maven Build') {
+            agent {
+                docker {
+                    image 'maven:3-jdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+                stash includes: '**/target/*.jar', name: 'lte-jar'
+            }
+        }
+        stage('Test - Linux') {
+            agent {
+                docker {
+                    image 'maven:3-jdk-11'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                unstash 'lte-jar'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Test - Windows') {
+            agent {
+                label 'windows'
+            }
+            steps {
+                unstash 'lte-jar'
+                bat 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Build/Tag/Push Docker Image') {
+            agent {
+                label 'windows'
+            }
+            steps {
+                bat 'jenkins/scripts/build-tag-push-image.cmd'
+            }
+        }
+    }
+}
