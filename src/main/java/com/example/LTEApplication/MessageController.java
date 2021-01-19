@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
 	private static final String automateMessage = "Automate all the things!";
-	private final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 	@Value("${app.name}")
 	private String name;
@@ -21,6 +20,7 @@ public class MessageController {
 
 	@GetMapping("/message")
 	public Message message() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return new Message(automateMessage, timestamp.getTime(), name, version);
 	}
 }
